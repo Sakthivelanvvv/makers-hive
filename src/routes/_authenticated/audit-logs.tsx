@@ -14,10 +14,14 @@ function AuditLogsPage() {
   const { data: logs = [] } = useQuery({
     queryKey: ["audit_logs"],
     queryFn: async () => {
-      const { data, error } = await supabase.from("audit_logs")
-        .select("*, profiles:user_id(name,email)").order("created_at", { ascending: false }).limit(200);
+      const { data, error } = await supabase.from("audit_logs").select("*").order("created_at", { ascending: false }).limit(200);
       if (error) throw error;
-      return data as Array<{ id: string; created_at: string; module: string; record_type: string | null; record_id: string | null; action: string; field_changed: string | null; old_value: string | null; new_value: string | null; profiles: { name: string | null; email: string } | null }>;
+      const userIds = Array.from(new Set((data ?? []).map((l) => l.user_id).filter((x): x is string => !!x)));
+      const { data: profiles } = userIds.length
+        ? await supabase.from("profiles").select("id,name,email").in("id", userIds)
+        : { data: [] as { id: string; name: string | null; email: string }[] };
+      const pMap = new Map((profiles ?? []).map((p) => [p.id, p]));
+      return (data ?? []).map((l) => ({ ...l, profile: l.user_id ? pMap.get(l.user_id) ?? null : null }));
     },
   });
 

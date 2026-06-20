@@ -12,8 +12,16 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedWorkOrdersRouteImport } from './routes/_authenticated/work-orders'
+import { Route as AuthenticatedWorkCentersRouteImport } from './routes/_authenticated/work-centers'
+import { Route as AuthenticatedUsersRouteImport } from './routes/_authenticated/users'
+import { Route as AuthenticatedSalesRouteImport } from './routes/_authenticated/sales'
+import { Route as AuthenticatedPurchaseRouteImport } from './routes/_authenticated/purchase'
 import { Route as AuthenticatedProductsRouteImport } from './routes/_authenticated/products'
+import { Route as AuthenticatedManufacturingRouteImport } from './routes/_authenticated/manufacturing'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedBomRouteImport } from './routes/_authenticated/bom'
+import { Route as AuthenticatedAuditLogsRouteImport } from './routes/_authenticated/audit-logs'
 
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
@@ -29,49 +37,147 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedWorkOrdersRoute = AuthenticatedWorkOrdersRouteImport.update({
+  id: '/work-orders',
+  path: '/work-orders',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedWorkCentersRoute =
+  AuthenticatedWorkCentersRouteImport.update({
+    id: '/work-centers',
+    path: '/work-centers',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedUsersRoute = AuthenticatedUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedSalesRoute = AuthenticatedSalesRouteImport.update({
+  id: '/sales',
+  path: '/sales',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedPurchaseRoute = AuthenticatedPurchaseRouteImport.update({
+  id: '/purchase',
+  path: '/purchase',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedProductsRoute = AuthenticatedProductsRouteImport.update({
   id: '/products',
   path: '/products',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedManufacturingRoute =
+  AuthenticatedManufacturingRouteImport.update({
+    id: '/manufacturing',
+    path: '/manufacturing',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedBomRoute = AuthenticatedBomRouteImport.update({
+  id: '/bom',
+  path: '/bom',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAuditLogsRoute = AuthenticatedAuditLogsRouteImport.update({
+  id: '/audit-logs',
+  path: '/audit-logs',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/audit-logs': typeof AuthenticatedAuditLogsRoute
+  '/bom': typeof AuthenticatedBomRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/manufacturing': typeof AuthenticatedManufacturingRoute
   '/products': typeof AuthenticatedProductsRoute
+  '/purchase': typeof AuthenticatedPurchaseRoute
+  '/sales': typeof AuthenticatedSalesRoute
+  '/users': typeof AuthenticatedUsersRoute
+  '/work-centers': typeof AuthenticatedWorkCentersRoute
+  '/work-orders': typeof AuthenticatedWorkOrdersRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/audit-logs': typeof AuthenticatedAuditLogsRoute
+  '/bom': typeof AuthenticatedBomRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/manufacturing': typeof AuthenticatedManufacturingRoute
   '/products': typeof AuthenticatedProductsRoute
+  '/purchase': typeof AuthenticatedPurchaseRoute
+  '/sales': typeof AuthenticatedSalesRoute
+  '/users': typeof AuthenticatedUsersRoute
+  '/work-centers': typeof AuthenticatedWorkCentersRoute
+  '/work-orders': typeof AuthenticatedWorkOrdersRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/_authenticated/audit-logs': typeof AuthenticatedAuditLogsRoute
+  '/_authenticated/bom': typeof AuthenticatedBomRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/manufacturing': typeof AuthenticatedManufacturingRoute
   '/_authenticated/products': typeof AuthenticatedProductsRoute
+  '/_authenticated/purchase': typeof AuthenticatedPurchaseRoute
+  '/_authenticated/sales': typeof AuthenticatedSalesRoute
+  '/_authenticated/users': typeof AuthenticatedUsersRoute
+  '/_authenticated/work-centers': typeof AuthenticatedWorkCentersRoute
+  '/_authenticated/work-orders': typeof AuthenticatedWorkOrdersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/dashboard' | '/products'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/audit-logs'
+    | '/bom'
+    | '/dashboard'
+    | '/manufacturing'
+    | '/products'
+    | '/purchase'
+    | '/sales'
+    | '/users'
+    | '/work-centers'
+    | '/work-orders'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/dashboard' | '/products'
+  to:
+    | '/'
+    | '/auth'
+    | '/audit-logs'
+    | '/bom'
+    | '/dashboard'
+    | '/manufacturing'
+    | '/products'
+    | '/purchase'
+    | '/sales'
+    | '/users'
+    | '/work-centers'
+    | '/work-orders'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/_authenticated/audit-logs'
+    | '/_authenticated/bom'
     | '/_authenticated/dashboard'
+    | '/_authenticated/manufacturing'
     | '/_authenticated/products'
+    | '/_authenticated/purchase'
+    | '/_authenticated/sales'
+    | '/_authenticated/users'
+    | '/_authenticated/work-centers'
+    | '/_authenticated/work-orders'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -103,11 +209,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/work-orders': {
+      id: '/_authenticated/work-orders'
+      path: '/work-orders'
+      fullPath: '/work-orders'
+      preLoaderRoute: typeof AuthenticatedWorkOrdersRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/work-centers': {
+      id: '/_authenticated/work-centers'
+      path: '/work-centers'
+      fullPath: '/work-centers'
+      preLoaderRoute: typeof AuthenticatedWorkCentersRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/users': {
+      id: '/_authenticated/users'
+      path: '/users'
+      fullPath: '/users'
+      preLoaderRoute: typeof AuthenticatedUsersRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/sales': {
+      id: '/_authenticated/sales'
+      path: '/sales'
+      fullPath: '/sales'
+      preLoaderRoute: typeof AuthenticatedSalesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/purchase': {
+      id: '/_authenticated/purchase'
+      path: '/purchase'
+      fullPath: '/purchase'
+      preLoaderRoute: typeof AuthenticatedPurchaseRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/products': {
       id: '/_authenticated/products'
       path: '/products'
       fullPath: '/products'
       preLoaderRoute: typeof AuthenticatedProductsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/manufacturing': {
+      id: '/_authenticated/manufacturing'
+      path: '/manufacturing'
+      fullPath: '/manufacturing'
+      preLoaderRoute: typeof AuthenticatedManufacturingRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/dashboard': {
@@ -117,17 +265,47 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/bom': {
+      id: '/_authenticated/bom'
+      path: '/bom'
+      fullPath: '/bom'
+      preLoaderRoute: typeof AuthenticatedBomRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/audit-logs': {
+      id: '/_authenticated/audit-logs'
+      path: '/audit-logs'
+      fullPath: '/audit-logs'
+      preLoaderRoute: typeof AuthenticatedAuditLogsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAuditLogsRoute: typeof AuthenticatedAuditLogsRoute
+  AuthenticatedBomRoute: typeof AuthenticatedBomRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedManufacturingRoute: typeof AuthenticatedManufacturingRoute
   AuthenticatedProductsRoute: typeof AuthenticatedProductsRoute
+  AuthenticatedPurchaseRoute: typeof AuthenticatedPurchaseRoute
+  AuthenticatedSalesRoute: typeof AuthenticatedSalesRoute
+  AuthenticatedUsersRoute: typeof AuthenticatedUsersRoute
+  AuthenticatedWorkCentersRoute: typeof AuthenticatedWorkCentersRoute
+  AuthenticatedWorkOrdersRoute: typeof AuthenticatedWorkOrdersRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAuditLogsRoute: AuthenticatedAuditLogsRoute,
+  AuthenticatedBomRoute: AuthenticatedBomRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedManufacturingRoute: AuthenticatedManufacturingRoute,
   AuthenticatedProductsRoute: AuthenticatedProductsRoute,
+  AuthenticatedPurchaseRoute: AuthenticatedPurchaseRoute,
+  AuthenticatedSalesRoute: AuthenticatedSalesRoute,
+  AuthenticatedUsersRoute: AuthenticatedUsersRoute,
+  AuthenticatedWorkCentersRoute: AuthenticatedWorkCentersRoute,
+  AuthenticatedWorkOrdersRoute: AuthenticatedWorkOrdersRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
