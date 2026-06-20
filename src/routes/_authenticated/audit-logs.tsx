@@ -42,7 +42,7 @@ function AuditLogsPage() {
               {logs.map((l) => (
                 <TableRow key={l.id}>
                   <TableCell className="text-xs whitespace-nowrap">{new Date(l.created_at).toLocaleString()}</TableCell>
-                  <TableCell>{l.profiles?.name ?? l.profiles?.email ?? "—"}</TableCell>
+                  <TableCell>{l.profile?.name ?? l.profile?.email ?? "—"}</TableCell>
                   <TableCell>{l.module}</TableCell>
                   <TableCell><span className="text-primary">{l.action}</span></TableCell>
                   <TableCell className="font-mono text-xs">{l.record_type} {l.record_id?.slice(0,8)}</TableCell>
